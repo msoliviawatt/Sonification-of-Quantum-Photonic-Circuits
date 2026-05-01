@@ -8,7 +8,9 @@ def main():
     t = np.linspace(0, 4, 1000)
     rabi = RabiModel()
 
-    prob_g, prob_e = rabi.probabilities(t, 6.0, 0.0)
+    omega = 6.0
+    detuning = 0.0
+    prob_g, prob_e = rabi.probabilities(t, omega, detuning)
 
     plt.figure(figsize=(10, 6))
     plt.plot(t, prob_g, label = "Ground State Probability")
@@ -37,7 +39,8 @@ def main():
     plt.show()
 
     # test phase shifter
-    phase_shifter = PhaseShifterModel(5.0)
+    v_for_pi = 5.0
+    phase_shifter = PhaseShifterModel(v_for_pi)
     voltage = np.linspace(0, 10, 1000)
     phase_from_v = phase_shifter.phase_from_voltage(voltage)
 
@@ -53,7 +56,8 @@ def main():
     resonator = ResonatorModel()
     drive_frequency = np.linspace(1, 30, 1000)
     resonance_frequency = 10.0
-    gain = resonator.enhancement(drive_frequency, resonance_frequency, 20)
+    q_factor = 20
+    gain = resonator.enhancement(drive_frequency, resonance_frequency, q_factor)
 
     plt.figure(figsize=(10, 6))
     plt.plot(drive_frequency, gain)
